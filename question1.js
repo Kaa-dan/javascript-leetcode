@@ -20,8 +20,7 @@
 // Input: nums = [3,3], target = 6
 // Output: [0,1]
 
-
-//my solution 
+//my solution
 var twoSum = function (nums, target) {
   //map for storing the previous elements
   const map = new Map();
@@ -36,25 +35,37 @@ var twoSum = function (nums, target) {
 
     map.set(nums[i], i);
   }
-  
 };
 
 //ai solution
 
-var twoSum = function(nums, target) {
-    if (!Array.isArray(nums) || typeof target !== 'number') {
-        throw new Error('Invalid input');
+var twoSum = function (nums, target) {
+  if (!Array.isArray(nums) || typeof target !== "number") {
+    throw new Error("Invalid input");
+  }
+
+  const map = {};
+
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i];
+    if (complement in map) {
+      return [map[complement], i];
     }
+    map[nums[i]] = i;
+  }
 
-    const map = {};
+  return []; // No solution found
+};
 
-    for (let i = 0; i < nums.length; i++) {
-        const complement = target - nums[i];
-        if (complement in map) {
-            return [map[complement], i];
-        }
-        map[nums[i]] = i;
+var twoSum = function (nums, target) {
+  if (nums.length < 3) return [0, 1];
+  const obj = {};
+  for (let i = 0; i < nums.length; i++) {
+    const remainder = target - nums[i];
+    if (obj[remainder] !== undefined) {
+      return [obj[remainder], i];
     }
-
-    return []; // No solution found
+    obj[i] = i;
+  }
+  return [];
 };
