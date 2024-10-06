@@ -69,3 +69,21 @@ var lengthOfLongestSubstring = function (s) {
 
   return maxLength;
 };
+
+//using object
+
+var lengthOfLongestSubstring = function (s) {
+  let max = 0;
+  let left = 0;
+  const map = {};
+
+  for (let right = 0; right < s.length; right++) {
+    if (map[s[right]] >= left) {
+      left = map[s[right]] + 1;
+    }
+    max = Math.max(max, right - left + 1);
+    map[s[right]] = right;
+  }
+
+  return max;
+};
