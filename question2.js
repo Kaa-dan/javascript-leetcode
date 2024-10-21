@@ -84,3 +84,26 @@ var addTwoNumbers = function (l1, l2) {
 
   return dummyHead.next;
 };
+
+var addTwoNumbers = function (l1, l2) {
+  let newList = new ListNode();
+  // for iterating
+  let curr = newList;
+
+  //storing the carry value
+  let carry = 0;
+
+  while (l1 || l2 || carry) {
+    let sum = (l1?.val || 0) + (l2?.val || 0) + carry;
+
+    curr.next = new ListNode(sum % 10);
+
+    carry = sum / 10;
+
+    l1 = l1?.next || null;
+    l2 = l2?.next || null;
+    curr = curr.next;
+  }
+
+  return newList.next;
+};
