@@ -95,28 +95,58 @@ var findMedianSortedArrays = function (nums1, nums2) {
   throw new Error("Input arrays are not sorted");
 };
 
-
-
-// i got this solution from leetcode 
+// i got this solution from leetcode
 
 var findMedianSortedArrays = function (nums1, nums2) {
-    const m = nums1.length, n = nums2.length, mn = m + n;
-    if (m > n) return findMedianSortedArrays(nums2, nums1);
-    let mid = (mn + 1) >> 1, left = 0, right = m;
-    while (left <= right) {
-        let mid1 = (left + right) >> 1;
-        let mid2 = mid - mid1;
-        let l1 = l2 = Number.MIN_SAFE_INTEGER, r1 = r2 = Number.MAX_SAFE_INTEGER;
-        if (mid1 - 1 >= 0) l1 = nums1[mid1 - 1];
-        if (mid1 < m) r1 = nums1[mid1];
-        if (mid2 - 1 >= 0) l2 = nums2[mid2 - 1];
-        if (mid2 < n) r2 = nums2[mid2];
-        if (l1 <= r2 && l2 <= r1) {
-            if (mn % 2) return Math.max(l1, l2);
-            else return (Math.max(l1, l2) + Math.min(r1, r2)) / 2.0
-        }
-        if (l1 > r2) right = mid1 - 1;
-        else left = mid1 + 1;
+  const m = nums1.length,
+    n = nums2.length,
+    mn = m + n;
+  if (m > n) return findMedianSortedArrays(nums2, nums1);
+  let mid = (mn + 1) >> 1,
+    left = 0,
+    right = m;
+  while (left <= right) {
+    let mid1 = (left + right) >> 1;
+    let mid2 = mid - mid1;
+    let l1 = (l2 = Number.MIN_SAFE_INTEGER),
+      r1 = (r2 = Number.MAX_SAFE_INTEGER);
+    if (mid1 - 1 >= 0) l1 = nums1[mid1 - 1];
+    if (mid1 < m) r1 = nums1[mid1];
+    if (mid2 - 1 >= 0) l2 = nums2[mid2 - 1];
+    if (mid2 < n) r2 = nums2[mid2];
+    if (l1 <= r2 && l2 <= r1) {
+      if (mn % 2) return Math.max(l1, l2);
+      else return (Math.max(l1, l2) + Math.min(r1, r2)) / 2.0;
     }
-    return 0;
+    if (l1 > r2) right = mid1 - 1;
+    else left = mid1 + 1;
+  }
+  return 0;
+};
+
+//almost same solution as above
+
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number}
+ */
+var findMedianSortedArrays = function (nums1, nums2) {
+  let array = [];
+  while (nums1.length || nums2.length) {
+    if (!nums1.length || !nums2.length) {
+      if (nums1.length) array.push(...nums1);
+      else array.push(...nums2);
+      break;
+    }
+    if (nums1[0] > nums2[0]) {
+      array.push(nums2.shift());
+    } else {
+      array.push(nums1.shift());
+    }
+  }
+  console.log(array);
+  return array.length % 2 === 0
+    ? (array[array.length / 2] + array[array.length / 2 - 1]) / 2
+    : array[Math.floor(array.length / 2)];
 };
