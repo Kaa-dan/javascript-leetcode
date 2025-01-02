@@ -17,7 +17,7 @@
  * @return {ListNode}
  */
 
-//optimised answer
+//using bitwise
 var addTwoNumbers = function (l1, l2) {
   let dummy = new ListNode();
   let curr = dummy;
@@ -39,24 +39,7 @@ var addTwoNumbers = function (l1, l2) {
   return dummy.next;
 };
 
-//claude ai result
-var addTwoNumbers = function (l1, l2) {
-  let resultList = new ListNode(0);
-  let currentNode = resultList;
-  let remainder = 0;
 
-  while (l1 || l2 || remainder) {
-    let sum = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + remainder;
-    remainder = Math.floor(sum / 10);
-    currentNode.next = new ListNode(sum % 10);
-    currentNode = currentNode.next;
-
-    l1 = l1 ? l1.next : null;
-    l2 = l2 ? l2.next : null;
-  }
-
-  return resultList.next;
-};
 
 // Solution 1: Optimized Current Approach
 var addTwoNumbers = function (l1, l2) {
