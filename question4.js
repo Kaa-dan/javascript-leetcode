@@ -49,6 +49,13 @@ var findMedianSortedArrays = function (nums1, nums2) {
   );
 };
 
+// my approach 
+var findMedianSortedArrays = function (nums1, nums2) {
+  let newArray = [...nums1, ...nums2]
+  newArray = newArray.sort((a,b)=>a-b)
+  console.log(newArray.length/2)
+  return newArray.length % 2 === 0 ? (newArray[Math.floor(newArray.length / 2)] + newArray[Math.floor(newArray.length / 2 - 1)]) / 2 : newArray[Math.floor(newArray.length / 2)]
+};
 console.log(findMedianSortedArrays([1, 3], [2]));
 
 //optimised way to solve the problem ai
