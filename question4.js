@@ -49,17 +49,20 @@ var findMedianSortedArrays = function (nums1, nums2) {
   );
 };
 
-// my approach  not good 
+// my approach  not good
 var findMedianSortedArrays = function (nums1, nums2) {
-  let newArray = [...nums1, ...nums2]
-  newArray = newArray.sort((a,b)=>a-b)
-  console.log(newArray.length/2)
-  return newArray.length % 2 === 0 ? (newArray[Math.floor(newArray.length / 2)] + newArray[Math.floor(newArray.length / 2 - 1)]) / 2 : newArray[Math.floor(newArray.length / 2)]
+  let newArray = [...nums1, ...nums2];
+  newArray = newArray.sort((a, b) => a - b);
+  console.log(newArray.length / 2);
+  return newArray.length % 2 === 0
+    ? (newArray[Math.floor(newArray.length / 2)] +
+        newArray[Math.floor(newArray.length / 2 - 1)]) /
+        2
+    : newArray[Math.floor(newArray.length / 2)];
 };
 console.log(findMedianSortedArrays([1, 3], [2]));
 
-
-//this problem should be solved using binary search what ever i done above is wrong and that is not  a good method 
+//this problem should be solved using binary search what ever i done above is wrong and that is not  a good method
 //optimised way to solve the problem ai
 
 var findMedianSortedArrays = function (nums1, nums2) {
@@ -160,85 +163,81 @@ var findMedianSortedArrays = function (nums1, nums2) {
     : array[Math.floor(array.length / 2)];
 };
 
-
-//got this answer from neet code .io 
-var findMedianSortedArrays = function(nums1, nums2) {
-  // Make sure nums1 is the shorter array
+//got this answer from neet code .io
+var findMedianSortedArrays = function (nums1, nums2) {
   let a, b;
   if (nums1.length > nums2.length) {
-      a = nums2;
-      b = nums1;
+    a = nums2;
+    b = nums1;
   } else {
-      a = nums1;
-      b = nums2;
+    a = nums1;
+    b = nums2;
   }
 
   const full = a.length + b.length;
   const half = Math.floor(full / 2);
   let left = 0;
-  let right = a.length;
+  let right = a.length; 
 
-  while (left <= right) {  // Changed condition to include equal
-      const i = Math.floor((left + right) / 2);
-      const j = half - i;  // Removed the -1
+  while (left <= right) {
+    const i = Math.floor((left + right) / 2);
+    const j = half - i;
 
-      const Aleft = i === 0 ? -Infinity : a[i - 1];  // Fixed index access
-      const Aright = i === a.length ? Infinity : a[i];
-      const Bleft = j === 0 ? -Infinity : b[j - 1];  // Fixed index access
-      const Bright = j === b.length ? Infinity : b[j];
+    const Aleft = i === 0 ? -Infinity : a[i - 1];
+    const Aright = i === a.length ? Infinity : a[i];
+    const Bleft = j === 0 ? -Infinity : b[j - 1];
+    const Bright = j === b.length ? Infinity : b[j];
 
-      if (Aleft <= Bright && Bleft <= Aright) {
-          // Even length
-          if (full % 2 === 0) {
-              const leftMax = Math.max(Aleft, Bleft);
-              const rightMin = Math.min(Aright, Bright);
-              return (leftMax + rightMin) / 2;
-          }
-          // Odd length
-          return Math.min(Aright, Bright);
-      } else if (Aleft > Bright) {
-          right = i - 1;
-      } else {
-          left = i + 1;
+    if (Aleft <= Bright && Bleft <= Aright) {
+      // Even length
+      if (full % 2 === 0) {
+        const leftMax = Math.max(Aleft, Bleft);
+        const rightMin = Math.min(Aright, Bright);
+        return (leftMax + rightMin) / 2;
       }
+      // Odd length
+      return Math.min(Aright, Bright);
+    } else if (Aleft > Bright) {
+      right = i - 1;
+    } else {
+      left = i + 1;
+    }
   }
-  return 0; // Should never reach here with valid input
+  return 0;
 };
 
+// avoid creating new arrays
 
-
-// avoid creating new arrays 
-
-var findMedianSortedArrays = function(nums1, nums2) {
+var findMedianSortedArrays = function (nums1, nums2) {
   // Use references instead of creating new arrays
   if (nums1.length > nums2.length) {
-      return findMedianSortedArrays(nums2, nums1);
+    return findMedianSortedArrays(nums2, nums1);
   }
-  
+
   const full = nums1.length + nums2.length;
   const half = Math.floor(full / 2);
   let left = 0;
   let right = nums1.length;
 
   while (left <= right) {
-      const i = Math.floor((left + right) / 2);
-      const j = half - i;
+    const i = Math.floor((left + right) / 2);
+    const j = half - i;
 
-      const Aleft = i === 0 ? -Infinity : nums1[i - 1];
-      const Aright = i === nums1.length ? Infinity : nums1[i];
-      const Bleft = j === 0 ? -Infinity : nums2[j - 1];
-      const Bright = j === nums2.length ? Infinity : nums2[j];
+    const Aleft = i === 0 ? -Infinity : nums1[i - 1];
+    const Aright = i === nums1.length ? Infinity : nums1[i];
+    const Bleft = j === 0 ? -Infinity : nums2[j - 1];
+    const Bright = j === nums2.length ? Infinity : nums2[j];
 
-      if (Aleft <= Bright && Bleft <= Aright) {
-          if (full % 2 === 0) {
-              return (Math.max(Aleft, Bleft) + Math.min(Aright, Bright)) / 2;
-          }
-          return Math.min(Aright, Bright);
-      } 
-      if (Aleft > Bright) {
-          right = i - 1;
-      } else {
-          left = i + 1;
+    if (Aleft <= Bright && Bleft <= Aright) {
+      if (full % 2 === 0) {
+        return (Math.max(Aleft, Bleft) + Math.min(Aright, Bright)) / 2;
       }
+      return Math.min(Aright, Bright);
+    }
+    if (Aleft > Bright) {
+      right = i - 1;
+    } else {
+      left = i + 1;
+    }
   }
 };
