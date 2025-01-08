@@ -61,3 +61,21 @@ var isPalindrome = function(x) {
 
     return x === p;
 };
+
+
+//got this answer from ai 
+var isPalindrome = function(x) {
+    // Handle negative numbers and numbers ending with 0
+    if (x < 0 || (x !== 0 && x % 10 === 0)) return false;
+    
+    let reversed = 0;
+    // Only reverse half the number
+    while (x > reversed) {
+        reversed = (reversed * 10) + (x % 10);
+        x = Math.floor(x / 10);
+    }
+    
+    // For even length: x === reversed
+    // For odd length: x === Math.floor(reversed / 10)
+    return x === reversed || x === Math.floor(reversed / 10);
+};

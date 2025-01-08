@@ -180,7 +180,9 @@ var findMedianSortedArrays = function (nums1, nums2) {
   let right = a.length; 
 
   while (left <= right) {
+    
     const i = Math.floor((left + right) / 2);
+
     const j = half - i;
 
     const Aleft = i === 0 ? -Infinity : a[i - 1];

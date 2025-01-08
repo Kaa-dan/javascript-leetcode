@@ -104,7 +104,7 @@ var lengthOfLongestSubstring = function (s) {
   return max;
 };
 
-//using asci code i need to go through this
+//using asci code 
 /**
  * @param {string} s
  * @return {number}
