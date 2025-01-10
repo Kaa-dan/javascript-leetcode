@@ -25,9 +25,7 @@
 // }
 // If all assertions pass, then your solution will be accepted.
 
-
-
-//my solution 
+//my solution
 /**
  * @param {number[]} nums
  * @return {number}
@@ -45,23 +43,19 @@ var removeDuplicates = function (nums) {
   return left;
 };
 
+// claude ai solution
 
-// claude ai solution 
+var removeDuplicates = function (nums) {
+  if (nums.length <= 1) return nums.length;
 
+  let writePointer = 1;
 
-
-var removeDuplicates = function(nums) {
-    if (nums.length <= 1) return nums.length;
-    
-    let writePointer = 1;
-    
-    for (let i = 1; i < nums.length; i++) {
-        if (nums[i] !== nums[writePointer - 1]) {
-            nums[writePointer] = nums[i];
-            writePointer++;
-        }
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] !== nums[writePointer - 1]) {
+      nums[writePointer] = nums[i];
+      writePointer++;
     }
-    
-    return writePointer;
-};
+  }
 
+  return writePointer;
+};
