@@ -57,8 +57,32 @@ console.log(strStr("sad", "sa"));
 var strStr = function(haystack, needle) {
   return haystack.indexOf(needle);
 };
-
-
+//anwer using o(n2)
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+var strStr = function(haystack, needle) {
+  // Handle empty needle case
+  if (needle.length === 0) return 0;
+  
+  for (let i = 0; i <= haystack.length - needle.length; i++) {
+      let match = true;
+      
+      // Check each character of needle
+      for (let j = 0; j < needle.length; j++) {
+          if (haystack[i + j] !== needle[j]) {
+              match = false;
+              break;
+          }
+      }
+      
+      if (match) return i;
+  }
+  
+  return -1;
+};
 // Here's an optimized solution using the KMP (Knuth-Morris-Pratt) algorithm, which is one of the most efficient ways to solve this string matching problem:
 
 /**
