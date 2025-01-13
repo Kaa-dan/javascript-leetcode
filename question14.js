@@ -101,3 +101,22 @@ function isCommonPrefix(strs, len) {
   }
   return true;
 }
+
+//another solution
+var longestCommonPrefix = function (strs) {
+  let firstWord = strs[0];
+  for (let i = 1; i < strs.length; i++) {
+    let singleWord = strs[i];
+    // If current word is shorter than firstWord, truncate firstWord
+    if (singleWord.length < firstWord.length) {
+      firstWord = firstWord.slice(0, singleWord.length);
+    }
+    for (let j = 0; j < singleWord.length; j++) {
+      if (firstWord[j] !== singleWord[j]) {
+        firstWord = singleWord.slice(0, j);
+        break;
+      }
+    }
+  }
+  return firstWord;
+};
