@@ -45,3 +45,4 @@ var twoSum = function (nums, target) {
       else map[nums[i]] =i
   }
 };
+console.log("nithin")
