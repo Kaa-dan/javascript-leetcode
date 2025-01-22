@@ -82,3 +82,25 @@ var isValid = function (s) {
 
   return stack.length === 0;
 };
+
+//using map
+const isValid = (s) => {
+  if (s.length % 2) return false;
+
+  const stack = [];
+  const map = new Map([
+    ["(", ")"],
+    ["{", "}"],
+    ["[", "]"],
+  ]);
+
+  for (const char of s) {
+    if (map.has(char)) {
+      stack.push(map.get(char));
+    } else if (char !== stack.pop()) {
+      return false;
+    }
+  }
+
+  return !stack.length;
+};
