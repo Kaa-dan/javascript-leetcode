@@ -68,14 +68,12 @@ var longestCommonPrefix = function (strs) {
 };
 
 //using binary search
-
 /**
  * @param {string[]} strs
  * @return {string}
  */
 var longestCommonPrefix = function (strs) {
   if (strs.length === 0) return "";
-
   // Find minimum length string
   let minLen = Math.min(...strs.map((str) => str.length));
 
@@ -90,8 +88,8 @@ var longestCommonPrefix = function (strs) {
       high = mid - 1;
     }
   }
-
-  return strs[0].substring(0, Math.floor((low + high) / 2));
+  // return strs[0].substring(0, Math.floor((low + high) / 2));
+  return strs[0].substring(0, high);
 };
 
 function isCommonPrefix(strs, len) {
@@ -118,5 +116,6 @@ var longestCommonPrefix = function (strs) {
       }
     }
   }
+
   return firstWord;
 };

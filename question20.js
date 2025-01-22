@@ -41,61 +41,44 @@
 // 1 <= s.length <= 104
 // s consists of parentheses only '()[]{}'.
 
-
-
-
 //my solution not optimised
 /**
  * @param {string} s
  * @return {boolean}
  */
 var isValid = function (s) {
-    if (s.length < 2) return false;
-
-    let array = [];
-
-    for (let i = 0; i < s.length; i++) {
-        console.log(array);
-
-        if (s[i] === "{" || s[i] === "[" || s[i] === "(") {
-            array.push(s[i]);
-        } else {
-            if (s[i] === "}" && array[array.length - 1] === "{") {
-                array.pop();
-            } else if (s[i] === "]" && array[array.length - 1] === "[") {
-                array.pop();
-            } else if (s[i] === ")" && array[array.length - 1] === "(") {
-                array.pop();
-            } else {
-                array.push(s[i]);
-            }
-        }
+  let stack = [];
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "[" || s[i] === "{" || s[i] === "(") stack.push(s[i]);
+    else {
+      if (s[i] === "]" && stack[stack.length - 1] === "[") stack.pop();
+      else if (s[i] === ")" && stack[stack.length - 1] === "(") stack.pop();
+      else if (s[i] === "}" && stack[stack.length - 1] === "{") stack.pop();
+      else return false;
     }
-    console.log(array);
-    return array.length === 0;
+  }
+  return stack.length === 0;
 };
 
+// claude ai given me this code
 
-// claude ai given me this code 
+var isValid = function (s) {
+  if (s.length % 2 !== 0) return false;
 
-var isValid = function(s) {
-    if (s.length % 2 !== 0) return false;
-    
-    const stack = [];
-    const pairs = {
-        '}': '{',
-        ']': '[',
-        ')': '('
-    };
-    
-    for (let char of s) {
-        if (!pairs[char]) {
-            stack.push(char);
-        } else if (stack.pop() !== pairs[char]) {
-            return false;
-        }
+  const stack = [];
+  const pairs = {
+    "}": "{",
+    "]": "[",
+    ")": "(",
+  };
+
+  for (let char of s) {
+    if (!pairs[char]) {
+      stack.push(char);
+    } else if (stack.pop() !== pairs[char]) {
+      return false;
     }
-    
-    return stack.length === 0;
-};
+  }
 
+  return stack.length === 0;
+};
