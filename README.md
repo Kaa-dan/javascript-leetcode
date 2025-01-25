@@ -16,11 +16,11 @@ This folder contains:
 - Solutions to various random problems from LeetCode.
 - Each solution is optimized for performance and includes comments to explain the logic.
 
-### 2. `neetcode-150/`
+### 2. `blind-75/`
 
 This folder contains:
 
-- Optimized solutions to the **NeetCode 150** problem set, which is designed to help master essential problem-solving patterns.
+- Optimized solutions to the **blind 75** problem set, which is designed to help master essential problem-solving patterns.
 - Solutions are structured for easy understanding and follow best practices.
 
 ---
