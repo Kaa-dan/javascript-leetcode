@@ -47,10 +47,3 @@ The repository includes problems across a variety of topics, such as:
 - And more...
 
 ---
-
-## 🔧 How to Use
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/javascript-leetcode.git
-   ```
