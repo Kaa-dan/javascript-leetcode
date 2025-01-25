@@ -65,24 +65,20 @@ var removeElement = function (nums, val) {
   return left;
 };
 
-
-
-
 // claude ai given me this  complexity is o(n/2 )
-var removeElement = function(nums, val) {
-    if (nums.length === 0) return 0;
-    
-    let left = 0;
-    let right = nums.length - 1;
-    
-    while (left <= right) {
-        if (nums[left] === val) {
-            nums[left] = nums[right];
-            right--;
-        } else {
-            left++;
-        }
+var removeElement = function (nums, val) {
+  if (nums.length === 0) return 0;
+
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left <= right) {
+    if (nums[left] === val) {
+      nums[left] = nums[right];
+      right--;
+    } else {
+      left++;
     }
-    
-    return left;
+  }
+  return left;
 };

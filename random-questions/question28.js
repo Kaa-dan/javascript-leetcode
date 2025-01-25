@@ -22,7 +22,6 @@
 // 1 <= haystack.length, needle.length <= 104
 // haystack and needle consist of only lowercase English characters.
 
-
 //this is my solution and it will not work some edge cases are here
 /**
  * @param {string} haystack
@@ -47,14 +46,14 @@ var strStr = function (haystack, needle) {
 
 console.log(strStr("sad", "sa"));
 
-// this i got the answer from claude which is simple using method in javascript 
+// this i got the answer from claude which is simple using method in javascript
 
 /**
  * @param {string} haystack
  * @param {string} needle
  * @return {number}
  */
-var strStr = function(haystack, needle) {
+var strStr = function (haystack, needle) {
   return haystack.indexOf(needle);
 };
 //anwer using o(n2)
@@ -63,24 +62,24 @@ var strStr = function(haystack, needle) {
  * @param {string} needle
  * @return {number}
  */
-var strStr = function(haystack, needle) {
+var strStr = function (haystack, needle) {
   // Handle empty needle case
   if (needle.length === 0) return 0;
-  
+
   for (let i = 0; i <= haystack.length - needle.length; i++) {
-      let match = true;
-      
-      // Check each character of needle
-      for (let j = 0; j < needle.length; j++) {
-          if (haystack[i + j] !== needle[j]) {
-              match = false;
-              break;
-          }
+    let match = true;
+
+    // Check each character of needle
+    for (let j = 0; j < needle.length; j++) {
+      if (haystack[i + j] !== needle[j]) {
+        match = false;
+        break;
       }
-      
-      if (match) return i;
+    }
+
+    if (match) return i;
   }
-  
+
   return -1;
 };
 // Here's an optimized solution using the KMP (Knuth-Morris-Pratt) algorithm, which is one of the most efficient ways to solve this string matching problem:
@@ -88,47 +87,49 @@ var strStr = function(haystack, needle) {
 /**
  * @param {string} haystack
  * @param {string} needle
- * @return {number} 
+ * @return {number}
  */
-var strStr = function(haystack, needle) {
+var strStr = function (haystack, needle) {
   // Handle edge cases
   if (needle.length === 0) return 0;
   if (needle.length > haystack.length) return -1;
 
   // Build the LPS (Longest Proper Prefix which is also Suffix) array
   const lps = new Array(needle.length).fill(0);
-  let prevLPS = 0, i = 1;
-  
+  let prevLPS = 0,
+    i = 1;
+
   while (i < needle.length) {
-      if (needle[i] === needle[prevLPS]) {
-          lps[i] = prevLPS + 1;
-          prevLPS++;
-          i++;
-      } else if (prevLPS === 0) {
-          lps[i] = 0;
-          i++;
-      } else {
-          prevLPS = lps[prevLPS - 1];
-      }
+    if (needle[i] === needle[prevLPS]) {
+      lps[i] = prevLPS + 1;
+      prevLPS++;
+      i++;
+    } else if (prevLPS === 0) {
+      lps[i] = 0;
+      i++;
+    } else {
+      prevLPS = lps[prevLPS - 1];
+    }
   }
-  
+
   // Search for the pattern
-  let haystackPtr = 0, needlePtr = 0;
-  
+  let haystackPtr = 0,
+    needlePtr = 0;
+
   while (haystackPtr < haystack.length) {
-      if (haystack[haystackPtr] === needle[needlePtr]) {
-          haystackPtr++;
-          needlePtr++;
-          
-          if (needlePtr === needle.length) {
-              return haystackPtr - needle.length;
-          }
-      } else if (needlePtr === 0) {
-          haystackPtr++;
-      } else {
-          needlePtr = lps[needlePtr - 1];
+    if (haystack[haystackPtr] === needle[needlePtr]) {
+      haystackPtr++;
+      needlePtr++;
+
+      if (needlePtr === needle.length) {
+        return haystackPtr - needle.length;
       }
+    } else if (needlePtr === 0) {
+      haystackPtr++;
+    } else {
+      needlePtr = lps[needlePtr - 1];
+    }
   }
-  
+
   return -1;
 };
