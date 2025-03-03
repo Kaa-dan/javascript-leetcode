@@ -25,23 +25,24 @@
  * @return {number[]}
  */
 
-//we can use either map or object to store 
+//we can use either map or object to store
 
 //map
 var twoSum = function (nums, target) {
-  let map = new Map()
+  let map = new Map();
   for (let i = 0; i < nums.length; i++) {
-      let remainder = target - nums[i]
-      if (map.has(remainder)) return [map.get(remainder), i]
-      else map.set(nums[i], i)
+    let remainder = target - nums[i];
+    if (map.has(remainder)) return [map.get(remainder), i];
+    else map.set(nums[i], i);
   }
 };
 //object
 var twoSum = function (nums, target) {
-  let map = {}
+  let map = {};
   for (let i = 0; i < nums.length; i++) {
-      let remainder = target - nums[i]
-      if (map[remainder]!==undefined) return [map[remainder], i]
-      else map[nums[i]] =i
+    let remainder = target - nums[i];
+    if (map[remainder] !== undefined) return [map[remainder], i];
+    else map[nums[i]] = i;
   }
 };
+//revised
