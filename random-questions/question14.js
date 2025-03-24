@@ -43,30 +43,6 @@ var longestCommonPrefix = function (strs) {
   return firstWord;
 };
 
-//claude given this answer
-/**
- * @param {string[]} strs
- * @return {string}
- */
-var longestCommonPrefix = function (strs) {
-  if (strs.length === 0) return "";
-
-  // Take first string as reference
-  let prefix = strs[0];
-
-  // For each remaining string
-  for (let i = 1; i < strs.length; i++) {
-    // While the current string doesn't start with our prefix
-    while (strs[i].indexOf(prefix) !== 0) {
-      // Shorten prefix by one character
-      prefix = prefix.substring(0, prefix.length - 1);
-      if (prefix === "") return "";
-    }
-  }
-
-  return prefix;
-};
-
 //using binary search
 /**
  * @param {string[]} strs
@@ -118,4 +94,25 @@ var longestCommonPrefix = function (strs) {
   }
 
   return firstWord;
+};
+
+var longestCommonPrefix = function (strs) {
+  // Edge cases: empty array or empty string in array
+  if (strs.length === 0) return "";
+
+  // Start with the first string as our initial prefix
+  let prefix = strs[0];
+
+  // Compare with each subsequent string
+  for (let i = 1; i < strs.length; i++) {
+    // While the current string doesn't start with our current prefix
+    // Shorten the prefix by removing the last character
+    while (strs[i].indexOf(prefix) !== 0) {
+      prefix = prefix.substring(0, prefix.length - 1);
+      // If prefix becomes empty, there's no common prefix
+      if (prefix === "") return "";
+    }
+  }
+
+  return prefix;
 };
